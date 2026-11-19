@@ -8,6 +8,9 @@ public partial class FormPrincipal : Form
     // Próximo Id a ser usado. Começa em 1 e sobe a cada cadastro.
     private int _proximoId = 1;
 
+    // O arquivo fica na mesma pasta do executável do programa.
+    private string _caminhoCsv = Path.Combine(Application.StartupPath, "ocorrencias.csv");
+
     public FormPrincipal()
     {
         InitializeComponent();
@@ -35,6 +38,7 @@ public partial class FormPrincipal : Form
         // Assim a grade não cria colunas novas sozinha a partir das properties.
         dgvOcorrencias.AutoGenerateColumns = false;
 
+        CarregarDados();
         AtualizarGrade();
     }
 
@@ -52,6 +56,7 @@ public partial class FormPrincipal : Form
             _ocorrencias.Add(nova);
             _proximoId++;
 
+            SalvarDados();
             AtualizarGrade();
             LimparFormulario();
         }
@@ -90,6 +95,7 @@ public partial class FormPrincipal : Form
         try
         {
             selecionada.MudarStatus(novoStatus);
+            SalvarDados();
             AtualizarGrade();
         }
         catch (ArgumentException erro)
@@ -118,6 +124,47 @@ public partial class FormPrincipal : Form
         }
 
         return resultado;
+    }
+
+    private void CarregarDados()
+    {
+        try
+        {
+            _ocorrencias = ArquivoCsv.Carregar(_caminhoCsv, out int linhasIgnoradas);
+
+            // O próximo Id continua depois do maior Id que veio do arquivo.
+            foreach (Ocorrencia ocorrencia in _ocorrencias)
+            {
+                if (ocorrencia.Id >= _proximoId)
+                    _proximoId = ocorrencia.Id + 1;
+            }
+
+            if (linhasIgnoradas > 0)
+            {
+                MessageBox.Show($"{linhasIgnoradas} linha(s) do arquivo estavam com defeito e foram ignoradas.",
+                    "Aviso ao carregar", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        catch (IOException erro)
+        {
+            MessageBox.Show("Não foi possível ler o arquivo de ocorrências.\n" + erro.Message,
+                "Erro ao carregar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    // Chamado depois de cada cadastro e de cada mudança de status.
+    private void SalvarDados()
+    {
+        // IOException acontece, por exemplo, se o arquivo estiver aberto no Excel.
+        try
+        {
+            ArquivoCsv.Salvar(_caminhoCsv, _ocorrencias);
+        }
+        catch (IOException erro)
+        {
+            MessageBox.Show("Não foi possível salvar o arquivo de ocorrências.\n" + erro.Message,
+                "Erro ao salvar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 
     // Mostra na grade a lista filtrada. O null antes força a grade a se redesenhar.
