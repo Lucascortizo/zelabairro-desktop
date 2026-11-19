@@ -81,6 +81,14 @@ public class Ocorrencia
         if (texto.Length < minimo || texto.Length > maximo)
             throw new ArgumentException($"O campo {campo} deve ter entre {minimo} e {maximo} caracteres.");
 
+        // O CSV usa ";" para separar colunas e uma linha por ocorrência,
+        // então esses caracteres quebrariam o arquivo.
+        foreach (char letra in texto)
+        {
+            if (letra == ';' || letra == '\n' || letra == '\r')
+                throw new ArgumentException($"O campo {campo} não pode ter ponto e vírgula nem quebra de linha.");
+        }
+
         return texto;
     }
 }
