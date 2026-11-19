@@ -51,7 +51,7 @@ public static class ArquivoCsv
             // As properties validam de novo os textos lidos do arquivo.
             try
             {
-                Ocorrencia ocorrencia = new Ocorrencia(id, tipo, partes[2], partes[3], partes[4], partes[5]);
+                Ocorrencia ocorrencia = CriadorOcorrencia.Criar(id, tipo, partes[2], partes[3], partes[4], partes[5]);
                 ocorrencia.MudarStatus(status);
                 ocorrencias.Add(ocorrencia);
             }

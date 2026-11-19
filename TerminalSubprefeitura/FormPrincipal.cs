@@ -50,7 +50,8 @@ public partial class FormPrincipal : Form
         {
             TipoOcorrencia tipo = (TipoOcorrencia)cmbTipo.SelectedItem!;
 
-            Ocorrencia nova = new Ocorrencia(_proximoId, tipo, txtDescricao.Text,
+            // A variável é do tipo Ocorrencia, mas o objeto criado depende do tipo escolhido.
+            Ocorrencia nova = CriadorOcorrencia.Criar(_proximoId, tipo, txtDescricao.Text,
                 txtBairro.Text, txtEndereco.Text, txtSolicitante.Text);
 
             _ocorrencias.Add(nova);
@@ -59,6 +60,9 @@ public partial class FormPrincipal : Form
             SalvarDados();
             AtualizarGrade();
             LimparFormulario();
+
+            // nova.ToString() chama a versão da classe filha que foi criada.
+            MessageBox.Show(nova.ToString(), "Ocorrência cadastrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         catch (ArgumentException erro)
         {
@@ -97,6 +101,8 @@ public partial class FormPrincipal : Form
             selecionada.MudarStatus(novoStatus);
             SalvarDados();
             AtualizarGrade();
+
+            MessageBox.Show(selecionada.ToString(), "Status alterado", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         catch (ArgumentException erro)
         {

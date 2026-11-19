@@ -58,6 +58,7 @@ partial class FormPrincipal
         colEndereco = new DataGridViewTextBoxColumn();
         colDescricao = new DataGridViewTextBoxColumn();
         colStatus = new DataGridViewTextBoxColumn();
+        colPrazo = new DataGridViewTextBoxColumn();
         grpCadastro.SuspendLayout();
         grpStatus.SuspendLayout();
         grpFiltros.SuspendLayout();
@@ -267,7 +268,7 @@ partial class FormPrincipal
         dgvOcorrencias.AllowUserToDeleteRows = false;
         dgvOcorrencias.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         dgvOcorrencias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        dgvOcorrencias.Columns.AddRange(new DataGridViewColumn[] { colId, colTipo, colSolicitante, colBairro, colEndereco, colDescricao, colStatus });
+        dgvOcorrencias.Columns.AddRange(new DataGridViewColumn[] { colId, colTipo, colSolicitante, colBairro, colEndereco, colDescricao, colStatus, colPrazo });
         dgvOcorrencias.Location = new Point(295, 85);
         dgvOcorrencias.MultiSelect = false;
         dgvOcorrencias.Name = "dgvOcorrencias";
@@ -332,6 +333,14 @@ partial class FormPrincipal
         colStatus.Name = "colStatus";
         colStatus.ReadOnly = true;
         //
+        // colPrazo
+        //
+        colPrazo.DataPropertyName = "PrazoDias";
+        colPrazo.FillWeight = 50F;
+        colPrazo.HeaderText = "Prazo (dias)";
+        colPrazo.Name = "colPrazo";
+        colPrazo.ReadOnly = true;
+        //
         // FormPrincipal
         //
         AutoScaleDimensions = new SizeF(7F, 15F);
@@ -386,4 +395,5 @@ partial class FormPrincipal
     private DataGridViewTextBoxColumn colEndereco;
     private DataGridViewTextBoxColumn colDescricao;
     private DataGridViewTextBoxColumn colStatus;
+    private DataGridViewTextBoxColumn colPrazo;
 }
