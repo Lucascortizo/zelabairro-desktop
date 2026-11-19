@@ -47,7 +47,8 @@ public class Ocorrencia
         set => _solicitante = ValidarTexto(value, "Solicitante", 3, 60);
     }
 
-    public StatusOcorrencia Status { get; set; }
+    // Só a própria classe muda o Status. De fora, use o método MudarStatus.
+    public StatusOcorrencia Status { get; private set; }
 
     public Ocorrencia(int id, TipoOcorrencia tipo, string descricao, string bairro, string endereco, string solicitante)
     {
@@ -59,6 +60,13 @@ public class Ocorrencia
         Endereco = endereco;
         Solicitante = solicitante;
         Status = StatusOcorrencia.Aberta;
+    }
+
+    public void MudarStatus(StatusOcorrencia novoStatus)
+    {
+        if (Status == StatusOcorrencia.Resolvida)
+            throw new ArgumentException("Esta ocorrência já foi resolvida e não pode mudar de status.");
+        Status = novoStatus;
     }
 
     // Regra comum dos campos de texto: obrigatório e com tamanho mínimo e máximo.
