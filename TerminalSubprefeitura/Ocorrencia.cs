@@ -2,6 +2,8 @@ namespace TerminalSubprefeitura;
 
 // Ocorrência recebida por telefone no terminal da subprefeitura.
 // Os campos são privados e só mudam pelas properties, que validam o valor.
+// É a classe base: OcorrenciaLimpeza, OcorrenciaIluminacao e OcorrenciaVia herdam dela.
+// O tipo Outro usa a própria Ocorrencia.
 public class Ocorrencia
 {
     private int _id;
@@ -50,6 +52,10 @@ public class Ocorrencia
     // Só a própria classe muda o Status. De fora, use o método MudarStatus.
     public StatusOcorrencia Status { get; private set; }
 
+    // Prazo em dias para a subprefeitura resolver. virtual deixa as classes filhas
+    // trocarem esse valor com override.
+    public virtual int PrazoDias => 7;
+
     public Ocorrencia(int id, TipoOcorrencia tipo, string descricao, string bairro, string endereco, string solicitante)
     {
         // Passa pelas properties para que a validação valha também na criação.
@@ -67,6 +73,13 @@ public class Ocorrencia
         if (Status == StatusOcorrencia.Resolvida)
             throw new ArgumentException("Esta ocorrência já foi resolvida e não pode mudar de status.");
         Status = novoStatus;
+    }
+
+    // Sobrescreve o ToString de object. Usa PrazoDias, então cada classe filha
+    // mostra o próprio prazo.
+    public override string ToString()
+    {
+        return $"Ocorrência {Id} - {Tipo} no bairro {Bairro} - {Status} - prazo de {PrazoDias} dias";
     }
 
     // Regra comum dos campos de texto: obrigatório e com tamanho mínimo e máximo.
