@@ -78,19 +78,51 @@ Quando a tabela mostra a coluna Prazo (dias), ou quando a mensagem de confirmaç
 
 ## Evidências
 
-Os prints ficam na pasta evidencias/.
+Os prints ficam na pasta TerminalSubprefeitura/evidencias/.
 
 - 01-tela-principal.png: o programa aberto de novo, com as ocorrências carregadas do CSV e prazos diferentes para cada tipo.
+
+  ![01-tela-principal](TerminalSubprefeitura/evidencias/01-tela-principal.png)
+
 - 02-cadastro-confirmado.png: mensagem de confirmação de um cadastro, com o texto do ToString da classe filha.
+
+  ![02-cadastro-confirmado](TerminalSubprefeitura/evidencias/02-cadastro-confirmado.png)
+
 - 03-erro-validacao.png: mensagem de erro de validação ao cadastrar com uma descrição curta.
+
+  ![03-erro-validacao](TerminalSubprefeitura/evidencias/03-erro-validacao.png)
+
 - 04-filtro.png: tabela filtrada por bairro e por status.
+
+  ![04-filtro](TerminalSubprefeitura/evidencias/04-filtro.png)
+
 - 05-status-alterado.png: mensagem de confirmação da mudança de status.
+
+  ![05-status-alterado](TerminalSubprefeitura/evidencias/05-status-alterado.png)
+
 - 06-resolvida-bloqueada.png: erro ao tentar mudar o status de uma ocorrência já resolvida.
+
+  ![06-resolvida-bloqueada](TerminalSubprefeitura/evidencias/06-resolvida-bloqueada.png)
+
 - 07-arquivo-csv.png: o arquivo ocorrencias.csv aberto no Bloco de Notas.
+
+  ![07-arquivo-csv](TerminalSubprefeitura/evidencias/07-arquivo-csv.png)
+
 - 08-codigo-heranca.png: a classe OcorrenciaLimpeza, com a herança, o construtor chamando a base e os override.
+
+  ![08-codigo-heranca](TerminalSubprefeitura/evidencias/08-codigo-heranca.png)
+
 - 09-codigo-polimorfismo.png: o método Criar, que escolhe a classe pelo tipo.
+
+  ![09-codigo-polimorfismo](TerminalSubprefeitura/evidencias/09-codigo-polimorfismo.png)
+
 - 10-pull-requests.png: os pull requests das versões no GitHub.
+
+  ![10-pull-requests](TerminalSubprefeitura/evidencias/10-pull-requests.png)
+
 - 11-tags.png: as tags das versões no GitHub.
+
+  ![11-tags](TerminalSubprefeitura/evidencias/11-tags.png)
 
 ## Tecnologias
 
@@ -110,3 +142,4 @@ Cada versão foi feita em uma branch feature, com pull request e tag.
 - v0.3.0: filtro por bairro e por status e mudança de status
 - v1.0.0: salvar e carregar em CSV e este README
 - v1.1.0: herança, polimorfismo, coluna de prazo e evidências
+- v1.1.1: imagens das evidências no README
